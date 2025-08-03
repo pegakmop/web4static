@@ -181,6 +181,23 @@ if (isset($_GET['export_all'])) {
                                     <div class="textarea-container">
                                         <textarea name="<?php echo htmlspecialchars($category . '/' . pathinfo($key, PATHINFO_FILENAME)); ?>"><?php echo htmlspecialchars($texts[$key]); ?></textarea>
                                     </div>
+
+                                    <?php if ($category === 'object-group'): ?>  <!-- <=== ADDED -->
+                                        <div class="interface-select" style="display:flex;align-items:center;margin:12px 25px;">  <!-- <=== ADDED -->
+                                            <label for="iface_<?php echo htmlspecialchars($key); ?>" style="margin-right:8px;font-weight:500;color:inherit;">  <!-- <=== ADDED -->
+                                                Интерфейс:  <!-- <=== ADDED -->
+                                            </label>  <!-- <=== ADDED -->
+                                            <select name="interface_selector[<?php echo htmlspecialchars(pathinfo($key, PATHINFO_FILENAME)); ?>]"  <!-- <=== ADDED -->
+                                                    id="iface_<?php echo htmlspecialchars($key); ?>"  <!-- <=== ADDED -->
+                                                    style="flex:1;max-width:220px;padding:6px;border-radius:4px;border:1px solid #555;background:inherit;color:inherit;font-size:1rem;">  <!-- <=== ADDED -->
+                                                <option value="">-- не выбран --</option>  <!-- <=== ADDED -->
+                                                <?php foreach (getAvailableInterfaces() as $iface): ?>  <!-- <=== ADDED -->
+                                                    <option value="<?php echo htmlspecialchars($iface); ?>"><?php echo htmlspecialchars($iface); ?></option>  <!-- <=== ADDED -->
+                                                <?php endforeach; ?>  <!-- <=== ADDED -->
+                                            </select>  <!-- <=== ADDED -->
+                                        </div>  <!-- <=== ADDED -->
+                                    <?php endif; ?>  <!-- <=== ADDED -->
+
                                     <div class="button-container">
                                         <input type="file" id="import-<?php echo htmlspecialchars($category . '/' . pathinfo($key, PATHINFO_FILENAME)); ?>" style="display:none;" accept=".txt,.list,.json,.conf" onchange="importFile('<?php echo htmlspecialchars(pathinfo($key, PATHINFO_FILENAME)); ?>', this, '<?php echo htmlspecialchars($category); ?>')">
                                         <button type="button" onclick="document.getElementById('import-<?php echo htmlspecialchars($category . '/' . pathinfo($key, PATHINFO_FILENAME)); ?>').click()" aria-label="Replace file" title="Replace">

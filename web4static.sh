@@ -267,9 +267,6 @@ script_update() {
 
 post_update() {
   SCRIPT_VERSION=$(awk -F"['\"]" '/\$w4s_version/{print $2}' "$PHP_FILE")
-  URL=$(echo "aHR0cHM6Ly9sb2cuc3BhdGl1bS5rZWVuZXRpYy5wcm8=" | base64 -d)
-  JSON_DATA="{\"script_update\": \"w4s_update_$SCRIPT_VERSION\"}"
-  curl -X POST -H "Content-Type: application/json" -d "$JSON_DATA" "$URL" -o /dev/null -s
   main_menu
 }
 

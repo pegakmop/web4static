@@ -21,7 +21,7 @@ PPPP   EEE    G  GG  AAAAA   KKK     M M M   O   O   PPPP
 P      E      G   G  A   A   K  K    M   M   O   O   P
 P      EEEEE   GGGG  A   A   K   K   M   M    OOO    P
 EOF
-}
+  printf "${NC}"
   echo ""
   echo "web4static mod by legacy"
   echo ""

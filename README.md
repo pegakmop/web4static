@@ -4,9 +4,13 @@
 
 ## Установка
 
-В `SSH` ввести команду для установки
+В `SSH` ввести команду для установки без object group
 ```shell
-opkg update && opkg install wget-ssl && opkg install curl && curl -L -s "https://raw.githubusercontent.com/spatiumstas/web4static/main/install.sh" > /tmp/install.sh && sh /tmp/install.sh
+opkg update && opkg install wget-ssl && opkg install curl && curl -L -s "https://raw.githubusercontent.com/pegakmop/web4static/main/install.sh" > /tmp/install.sh && sh /tmp/install.sh
+```
+В `SSH` ввести команду для установки с object group
+```shell
+opkg update && opkg install wget-ssl && opkg install curl && curl -L -s "https://raw.githubusercontent.com/spatiumstas/web4static/legacy/install.sh" > /tmp/install.sh && sh /tmp/install.sh
 ```
 
 > [!NOTE]

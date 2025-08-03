@@ -184,7 +184,7 @@ install_web() {
 
   if [ "$file_count" -ge 3 ] && [ -f "$WEB4STATIC_DIR/web4static.php" ]; then
     echo ""
-    read -p "Открывать Web-интерфейс напрямую по $user_ip:88? (y/n): " choice
+    read -p "Открывать Web-интерфейс веб панели напрямую по адресу: http://$user_ip:88? (y/n): " choice
     case "$choice" in
     [yY]*) set_static true ;;
     *) set_static false ;;

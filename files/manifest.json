@@ -1,7 +1,7 @@
 {
   "name": "web4static",
   "short_name": "web4static",
-  "start_url": "/w4s/",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#1b2434",
   "theme_color": "#fff",

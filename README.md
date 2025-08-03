@@ -14,4 +14,7 @@ opkg update && opkg install wget-ssl && opkg install curl && curl -L -s "https:/
 ```
 
 > [!NOTE]
-> Веб-интерфейс доступен по адресу `http://<router_ip>:99` (например http://192.168.1.1:99)<br/>
+> Веб-интерфейс доступен по адресу `http://<router_ip>:88` (например http://192.168.1.1:88)<br/>
+
+
+Данный репозиторий это форк авторского [основного репозитория](https://github.com/spatiumstas/web4static)

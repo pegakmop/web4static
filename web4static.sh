@@ -15,14 +15,15 @@ print_menu() {
   printf "\033c"
   printf "${CYAN}"
   cat <<'EOF'
-                __    __ __       __        __  _
- _      _____  / /_  / // / _____/ /_____ _/ /_(_)____
-| | /| / / _ \/ __ \/ // /_/ ___/ __/ __ `/ __/ / ___/
-| |/ |/ /  __/ /_/ /__  __(__  ) /_/ /_/ / /_/ / /__
-|__/|__/\___/_.___/  /_/ /____/\__/\__,_/\__/_/\___/
+PPPP   EEEEE   GGGG   AAA    K   K   M   M    OOO    PPPP
+P   P  E      G      A   A   K  K    MM MM   O   O   P   P
+PPPP   EEE    G  GG  AAAAA   KKK     M M M   O   O   PPPP
+P      E      G   G  A   A   K  K    M   M   O   O   P
+P      EEEEE   GGGG  A   A   K   K   M   M    OOO    P
 EOF
+}
   echo ""
-  echo "web4static mod legacy"
+  echo "web4static mod by legacy"
   echo ""
   echo "1. Установить/Обновить web-интерфейс"
   echo "2. Удалить web-интерфейс"

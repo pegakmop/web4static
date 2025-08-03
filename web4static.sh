@@ -15,13 +15,14 @@ print_menu() {
   printf "\033c"
   printf "${CYAN}"
   printf "${NC}"
-  echo "web4static legacy"
+  echo ""
+  echo "web4static mod legacy"
   echo ""
   echo "1. Установить/Обновить web-интерфейс"
   echo "2. Удалить web-интерфейс"
   echo "3. Удалить используемые пакеты"
   echo "4. Обновить скрипт"
-  echo "0. Выход"
+  echo "0. Выход из установочного скрипта"
   echo ""
 }
 

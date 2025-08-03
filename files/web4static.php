@@ -81,8 +81,8 @@ if (isset($_GET['export_all'])) {
     <meta name="theme-color" content="#fff">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>web4static</title>
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/spatiumstas/web4static/refs/heads/legacy/icons/apple-touch-icon.png">
-    <link rel="icon" href="https://raw.githubusercontent.com/spatiumstas/web4static/legacy/icons/favicon.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/pegakmop/web4static/refs/heads/legacy/icons/apple-touch-icon.png">
+    <link rel="icon" href="https://raw.githubusercontent.com/pegakmop/web4static/legacy/icons/favicon.png">
     <link rel="stylesheet" href="files/styles.css?v=<?php echo $cache_buster; ?>">
     <link rel="manifest" href="files/manifest.json?v=<?php echo $cache_buster; ?>">
     <script src="files/script.js?v=<?php echo $cache_buster; ?>" defer></script>
@@ -213,7 +213,7 @@ if (isset($_GET['export_all'])) {
         <button type="button" onclick="exportAllFiles()" aria-label="Save all lists" title="Сохранить все списки">
             <svg width="24" height="24"><use href="#download-file"/></svg>
         </button>
-        <a href="https://github.com/spatiumstas/web4static" target="_blank">
+        <a href="https://github.com/pegakmop/web4static" target="_blank">
             <svg id="github-light-icon" class="github-icon" width="24" height="24"><use href="#github-light"/></svg>
             <svg id="github-dark-icon" class="github-icon" width="24" height="24"><use href="#github-dark"/></svg>
         </a>

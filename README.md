@@ -10,7 +10,7 @@ opkg update && opkg install wget-ssl && opkg install curl && curl -L -s "https:/
 ```
 В `SSH` ввести команду для установки с object group
 ```shell
-opkg update && opkg install wget-ssl && opkg install curl && curl -L -s "https://raw.githubusercontent.com/spatiumstas/web4static/legacy/install.sh" > /tmp/install.sh && sh /tmp/install.sh
+opkg update && opkg install wget-ssl && opkg install curl && curl -L -s "https://raw.githubusercontent.com/pegakmop/web4static/legacy/install.sh" > /tmp/install.sh && sh /tmp/install.sh
 ```
 
 > [!NOTE]

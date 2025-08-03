@@ -15,13 +15,14 @@ print_menu() {
   printf "\033c"
   printf "${CYAN}"
   printf "${NC}"
+  echo "web4static legacy"
   echo ""
   echo "1. Установить/Обновить web-интерфейс"
   echo "2. Удалить web-интерфейс"
   echo ""
-  echo "77. Удалить используемые пакеты"
-  echo "99. Обновить скрипт"
-  echo "00. Выход"
+  echo "3. Удалить используемые пакеты"
+  echo "4. Обновить скрипт"
+  echo "0. Выход"
   echo ""
 }
 
@@ -37,9 +38,9 @@ main_menu() {
     case "$choice" in
     1) install_web "${branch:-legacy}" ;;
     2) remove_web ;;
-    77) packages_delete ;;
-    99) script_update "legacy" ;;
-    00) exit ;;
+    3) packages_delete ;;
+    4) script_update "legacy" ;;
+    0) exit ;;
     *)
       echo "Неверный выбор. Попробуйте снова."
       sleep 1
@@ -260,6 +261,7 @@ script_update() {
 
 post_update() {
   SCRIPT_VERSION=$(awk -F"['\"]" '/\$w4s_version/{print $2}' "$PHP_FILE")
+  #уведомления вырезаны в целях не захламлять и не слать ошибки в основной репозиторий
   main_menu
 }
 

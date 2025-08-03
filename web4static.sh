@@ -11,6 +11,9 @@ PHP_FILE="$WEB4STATIC_DIR/web4static.php"
 UHTTPD_CONF="/opt/etc/uhttpd.conf"
 PHP_INI="/opt/etc/php.ini"
 
+
+
+
 print_menu() {
   printf "\033c"
   printf "${CYAN}"
@@ -23,13 +26,11 @@ P      EEEEE   GGGG  A   A   K   K   M   M    OOO    P
 EOF
   printf "${NC}"
   echo ""
-  echo "web4static mod by legacy"
-  echo ""
   echo "1. Установить/Обновить web-интерфейс"
   echo "2. Удалить web-интерфейс"
   echo "3. Удалить используемые пакеты"
   echo "4. Обновить скрипт"
-  echo "0. Выход из установочного скрипта"
+  echo "0. Выход"
   echo ""
 }
 

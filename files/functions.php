@@ -116,7 +116,7 @@ function restartServices($changedCategories = null) {
 }
 
 function checkUpdate() {
-    $fileUrl = 'https://raw.githubusercontent.com/spatiumstas/web4static/refs/heads/legacy/files/web4static.php';
+    $fileUrl = 'https://raw.githubusercontent.com/pegakmop/web4static/refs/heads/legacy/files/web4static.php';
     $fileContent = trim(shell_exec("curl -s $fileUrl"));
 
     if (!$fileContent) {

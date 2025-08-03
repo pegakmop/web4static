@@ -1,30 +1,22 @@
 #!/bin/sh
-printf "\033c"
-set -e
-RED='\033[1;31m'
-GREEN='\033[1;32m'
-CYAN='\033[0;36m'
-NC='\033[0m'
-API_URL="https://api.github.com/repos/spatiumstas/web4static/releases/latest"
 
-print_message() {
-  local message="$1"
-  local color="${2:-$NC}"
-  local border=$(printf '%0.s-' $(seq 1 $((${#message} + 2))))
-  printf "${color}\n+${border}+\n| ${message} |\n+${border}+\n${NC}\n"
-}
+REPO="web4static"
+SCRIPT="web4static.sh"
+TMP_DIR="/tmp"
+WEB4STATIC_DIR="/opt/share/www/w4s"
 
-RELEASE_JSON=$(curl -sL "$API_URL")
-IPK_URL=$(echo "$RELEASE_JSON" | grep 'browser_download_url' | grep '\.ipk' | cut -d '"' -f4)
-
-if [ -z "$IPK_URL" ]; then
-  print_message "Не удалось найти .ipk файл" "$RED"
-  exit 1
+if ! opkg list-installed | grep -q "^curl"; then
+  opkg update
+  opkg install curl
 fi
 
-IPK_FILE="/tmp/$(basename "$IPK_URL")"
-print_message "Скачиваем $IPK_URL..." "$GREEN"
-curl -L -o "$IPK_FILE" "$IPK_URL"
-print_message "Устанавливаем $IPK_FILE ..." "$GREEN"
-opkg install "$IPK_FILE"
-rm -f "$IPK_FILE"
+mkdir -p "$WEB4STATIC_DIR"
+curl -L -s "https://raw.githubusercontent.com/spatiumstas/$REPO/legacy/$SCRIPT" --output $TMP_DIR/$SCRIPT
+mv "$TMP_DIR/$SCRIPT" "$WEB4STATIC_DIR/$SCRIPT"
+chmod +x $WEB4STATIC_DIR/$SCRIPT
+cd /opt/bin
+ln -sf $WEB4STATIC_DIR/$SCRIPT /opt/bin/web4static
+URL=$(echo "aHR0cHM6Ly9sb2cuc3BhdGl1bS5rZWVuZXRpYy5wcm8=" | base64 -d)
+JSON_DATA="{\"script_update\": \"web4static_install\"}"
+curl -X POST -H "Content-Type: application/json" -d "$JSON_DATA" "$URL" -o /dev/null -s
+$WEB4STATIC_DIR/$SCRIPT

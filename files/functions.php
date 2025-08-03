@@ -195,7 +195,7 @@ function getReleaseNotes($version) {
     if ($release && isset($release['body'])) {
         $notes = explode("\n", trim($release['body']));
         $notes = array_filter($notes, function($line) {
-            return !empty(trim($line)) && strpos($line, '#') !== 0;
+            return !empty(trim($line)) && strpos(trim($line), '#') !== 0;
         });
     }
 
@@ -231,6 +231,43 @@ function getLists($paths, bool $useShell = false): array {
     return $result;
 }
 
+
+
+function getAvailableInterfaces(): array {
+    $out = shell_exec('/bin/ndmc -c "show interface" 2>/dev/null');
+    if (!$out) {
+        return [];
+    }
+    $list = [];
+    foreach (explode("\n", $out) as $line) {
+        if (preg_match('/^Interface, name = "(.*?)"/', trim($line), $m)) {
+            $name = $m[1];
+            if (preg_match('/^(Wireguard|Proxy|OpenConnect|ZeroTier|AccessPoint|GuestWiFi|GigabitEthernet)/', $name)) {
+                $list[] = $name;
+            }
+        }
+    }
+    $list = array_unique($list);
+
+    // Ищем именно «ISP» — если метка есть где-то в описании интерфейса, считаем его провайдерским
+    $provider = null;
+    foreach ($list as $iface) {
+        $raw = shell_exec('/bin/ndmc -c "show interface '.$iface.'" 2>/dev/null');
+        if (strpos($raw, ' ISP') !== false || preg_match('/\balias:\s*ISP\b/i', $raw)) {
+            $provider = $iface;
+            break;
+        }
+    }
+    if ($provider) {
+        // вынесем в начало списка
+        $list = array_diff($list, [$provider]);
+        array_unshift($list, $provider);
+    }
+
+    return $list;
+}
+                                       
+
 function exportAllFiles($categories) {
     $tempDir = sys_get_temp_dir() . '/w4s_backup_' . time();
     mkdir($tempDir, 0777, true);
@@ -255,7 +292,7 @@ function exportAllFiles($categories) {
     shell_exec($tarCmd);
     shell_exec("rm -rf " . escapeshellarg($tempDir));
     header('Content-Type: application/gzip');
-    header('Content-Disposition: attachment; filename="w4s_backup_' . date('Y-m-d') . '.tar.gz"');
+    header('Content-Disposition: attachment; filename=\"w4s_backup_' . date('Y-m-d') . '.tar.gz\"');
     header('Content-Length: ' . filesize($archiveName));
     header('Cache-Control: no-cache, must-revalidate');
     readfile($archiveName);
@@ -280,6 +317,18 @@ function sendRciRequest($commands) {
 }
 
 function handlePostRequest($files) {
+    // Считываем выбранные интерфейсы (Wireguard0, Proxy0 и т.п.)
+    $chosenIfaces = [];                                                   // <=== ADDED
+    if (!empty($_POST['interface_selector']) && is_array($_POST['interface_selector'])) {  // <=== ADDED
+        foreach ($_POST['interface_selector'] as $group => $iface) {     // <=== ADDED
+            $g = trim($group);                                           // <=== ADDED
+            $i = trim($iface);                                           // <=== ADDED
+            if ($g !== '' && $i !== '') {                                // <=== ADDED
+                $chosenIfaces[$g] = $i;                                  // <=== ADDED
+            }                                                             // <=== ADDED
+        }                                                                 // <=== ADDED
+    }                                                                     // <=== ADDED
+
     $commands = [];
     $changedCategories = [];
 
@@ -324,6 +373,13 @@ function handlePostRequest($files) {
                     foreach ($toExclude as $domain) {
                         $commands[] = "no object-group fqdn $fileName include $domain";
                     }
+
+                    // Привязка object-group к выбранному интерфейсу
+                    if (!empty($chosenIfaces[$fileName])) {                   // <=== ADDED
+                        $iface = $chosenIfaces[$fileName];                    // <=== ADDED
+                        $commands[] = "dns-proxy route object-group $fileName $iface auto";  // <=== ADDED
+                    }                                                        // <=== ADDED
+
                 } else {
                     file_put_contents($filePath, $content);
                     $tmpFile = $filePath . '.tmp';
@@ -350,6 +406,9 @@ function handlePostRequest($files) {
     exit();
 }
 
+/**
+ * Получить списки object-group fqdn через RCI
+ */
 function getObjectGroupLists() {
     global $rci;
     if (!file_exists('/bin/ndmc')) {

@@ -16,7 +16,4 @@ mv "$TMP_DIR/$SCRIPT" "$WEB4STATIC_DIR/$SCRIPT"
 chmod +x $WEB4STATIC_DIR/$SCRIPT
 cd /opt/bin
 ln -sf $WEB4STATIC_DIR/$SCRIPT /opt/bin/web4static
-URL=$(echo "aHR0cHM6Ly9sb2cuc3BhdGl1bS5rZWVuZXRpYy5wcm8=" | base64 -d)
-JSON_DATA="{\"script_update\": \"web4static_install\"}"
-curl -X POST -H "Content-Type: application/json" -d "$JSON_DATA" "$URL" -o /dev/null -s
 $WEB4STATIC_DIR/$SCRIPT

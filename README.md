@@ -4,7 +4,7 @@
 
 ## Установка
 
-В `SSH` ввести команду для установки с object group управлением
+В `SSH` ввести команду для установки с наличием управления object group 
 ```shell
 opkg update && opkg install wget-ssl && opkg install curl && curl -L -s "https://raw.githubusercontent.com/pegakmop/web4static/legacy/install.sh" > /tmp/install.sh && sh /tmp/install.sh
 ```

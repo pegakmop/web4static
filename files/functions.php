@@ -139,7 +139,7 @@ function checkUpdate() {
 function updateScript() {
     $remoteVersion = isset($_GET['remote_version']) ? $_GET['remote_version'] : 'unknown';
 
-    $apiUrl = 'https://api.github.com/repos/spatiumstas/web4static/contents/files?ref=legacy';
+    $apiUrl = 'https://api.github.com/repos/pegakmop/web4static/contents/files?ref=legacy';
     $command = "curl -s -L -H 'User-Agent: web4static-updater' \"$apiUrl\"";
     $response = shell_exec($command);
     $files = json_decode($response, true);
@@ -171,18 +171,14 @@ function updateScript() {
             }
         }
 
-        downloadFile("https://raw.githubusercontent.com/spatiumstas/web4static/legacy/web4static.sh", WEB4STATIC_DIR . '/web4static.sh');
+        downloadFile("https://raw.githubusercontent.com/pegakmop/web4static/legacy/web4static.sh", WEB4STATIC_DIR . '/web4static.sh');
         $success = $allFilesDownloaded ? true : false;
         $output .= $allFilesDownloaded ? '' : "Не все файлы были успешно скачаны\n";
     } else {
         $output = "Ошибка запроса к GitHub API:\n" . $response;
     }
 
-    $shortUrl = "aHR0cHM6Ly9sb2cuc3BhdGl1bS5rZWVuZXRpYy5wcm8=";
-    $url = base64_decode($shortUrl);
-    $json_data = json_encode(["script_update" => "w4s_update_$remoteVersion"]);
-    $curl_command = "curl -X POST -H 'Content-Type: application/json' -d '$json_data' '$url' -o /dev/null -s";
-    shell_exec($curl_command);
+    
 
     header('Content-Type: application/json');
     echo json_encode(['success' => $success, 'output' => $output]);
@@ -190,7 +186,7 @@ function updateScript() {
 }
 
 function getReleaseNotes($version) {
-    $apiUrl = "https://api.github.com/repos/spatiumstas/web4static/releases/tags/$version";
+    $apiUrl = "https://api.github.com/repos/pegakmop/web4static/releases/tags/$version";
     $command = "curl -s -L -H 'User-Agent: web4static-updater' \"$apiUrl\"";
     $response = shell_exec($command);
     $release = json_decode($response, true);

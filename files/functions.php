@@ -377,7 +377,7 @@ function handlePostRequest($files) {
                     // Привязка object-group к выбранному интерфейсу
                     if (!empty($chosenIfaces[$fileName])) {                   // <=== ADDED
                         $iface = $chosenIfaces[$fileName];                    // <=== ADDED
-                        $commands[] = "dns-proxy route object-group $fileName $iface auto";  // <=== ADDED
+                        $commands[] = "dns-proxy route object-group $fileName $iface auto reject";  // <=== ADDED
                     }                                                        // <=== ADDED
 
                 } else {

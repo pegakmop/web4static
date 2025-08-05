@@ -242,7 +242,7 @@ function getAvailableInterfaces(): array {
     foreach (explode("\n", $out) as $line) {
         if (preg_match('/^Interface, name = "(.*?)"/', trim($line), $m)) {
             $name = $m[1];
-            if (preg_match('/^(Wireguard|Proxy|OpenConnect|L2TP|SSTP|ZeroTier|GigabitEthernet)/', $name)) {
+            if (preg_match('/^(Wireguard|Proxy|OpenConnect|OpenVPN|L2TP|PPTP|SSTP|OpkgTun|ZeroTier|GigabitEthernet)/', $name)) {
                 $list[] = $name;
             }
         }

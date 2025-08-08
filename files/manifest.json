@@ -1,9 +1,11 @@
 {
-  "name": "web4static",
-  "short_name": "web4static",
+  "name": "
+DNS: маршрутизация на основе object group FQDN
+",
+  "short_name": "DNS FQDN",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1b2434",
+  "background_color": "#fff",
   "theme_color": "#fff",
   "orientation": "any",
   "prefer_related_applications": false,

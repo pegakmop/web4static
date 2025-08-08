@@ -1,2 +1,2 @@
 
-web4static legacy mod by @pegakmop
+DNS: маршрутизация на основе object group FQDN

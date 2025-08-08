@@ -185,12 +185,12 @@ if (isset($_GET['export_all'])) {
                                     <?php if ($category === 'object-group'): ?>  <!-- <=== ADDED -->
                                         <div class="interface-select" style="display:flex;align-items:center;margin:12px 25px;">  <!-- <=== ADDED -->
                                             <label for="iface_<?php echo htmlspecialchars($key); ?>" style="margin-right:8px;font-weight:500;color:inherit;">  <!-- <=== ADDED -->
-                                                Интерфейс:  <!-- <=== ADDED -->
+                                                <!-- <=== ADDED [Интерфейс:  ]-->
                                             </label>  <!-- <=== ADDED -->
                                             <select name="interface_selector[<?php echo htmlspecialchars(pathinfo($key, PATHINFO_FILENAME)); ?>]"  <!-- <=== ADDED -->
                                                     id="iface_<?php echo htmlspecialchars($key); ?>"  <!-- <=== ADDED -->
                                                     style="flex:1;max-width:220px;padding:6px;border-radius:4px;border:1px solid #555;background:inherit;color:inherit;font-size:1rem;">  <!-- <=== ADDED -->
-                                                <option value="">-- не выбран --</option>  <!-- <=== ADDED -->
+                                                <option value="">Выбрать интерфейс для маршрутизации...</option>  <!-- <=== ADDED -->
                                                 <?php foreach (getAvailableInterfaces() as $iface): ?>  <!-- <=== ADDED -->
                                                     <option value="<?php echo htmlspecialchars($iface); ?>"><?php echo htmlspecialchars($iface); ?></option>  <!-- <=== ADDED -->
                                                 <?php endforeach; ?>  <!-- <=== ADDED -->
@@ -238,7 +238,7 @@ if (isset($_GET['export_all'])) {
             <svg width="24" height="24"><use href="#opkg"/></svg>
         </button>
         <div id="update-w4s-panel" style="display: none;">
-            <span>Доступно обновление</span>
+            <span>Доступно новое обновление</span>
             <div class="progress-bar" style="display: none;"></div>
         </div>
     </footer>

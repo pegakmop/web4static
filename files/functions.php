@@ -53,6 +53,13 @@ $SERVICES = [
             return is_file('/opt/etc/init.d/S99sing-box') ? ['/opt/etc/init.d/S99sing-box restart'] : [];
         }
     ],
+    'xray' => [
+        'path' => '/opt/etc/xray',
+        'useShell' => false,
+        'services' => function() {
+            return is_file('/opt/etc/init.d/S24xray') ? ['/opt/etc/init.d/S24xray restart'] : [];
+        }
+    ],
     'HydraRoute' => [
         'path' => ['/opt/etc/HydraRoute', '/opt/etc/AdGuardHome'],
         'useShell' => false,
@@ -242,7 +249,7 @@ function getAvailableInterfaces(): array {
     foreach (explode("\n", $out) as $line) {
         if (preg_match('/^Interface, name = "(.*?)"/', trim($line), $m)) {
             $name = $m[1];
-            if (preg_match('/^(Wireguard|Proxy|OpenConnect|OpenVPN|L2TP|PPTP|SSTP|OpkgTun|ZeroTier|GigabitEthernet)/', $name)) {
+            if (preg_match('/^(Wireguard|Proxy|OpenConnect|OpenVPN|L2TP|PPTP|OpkgTun|ZeroTier|GigabitEthernet)/', $name)) {
                 $list[] = $name;
             }
         }

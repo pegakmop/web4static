@@ -1,8 +1,8 @@
-## Веб-интерфейс mod web4static для управления разными списками на Alpha прошивке KeneticOS 5.10 и более новых осях
+## Веб-интерфейс панель mod web4static для управления разными списками на Alpha прошивке KeneticOS 5.10 и более новых осях
 
 ![IMG_0671-round-corners](https://github.com/user-attachments/assets/8b0e44b3-bf50-464f-b389-04a7e8f8f29c)
 
-## Установка
+## Установка, обновление и удаление
 
 В `SSH` ввести команду для установки с наличием управления object group 
 ```shell
